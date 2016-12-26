@@ -1,5 +1,12 @@
 {
-  "path": "/home/serj/PycharmProjects/test-dir",
-  "quantity": 7,
-  "zip_path":"/home/serj/PycharmProjects/"
+  "proj1": {
+    "path": "/home/serj/PycharmProjects/untitled/test-dir",
+    "quantity": 7,
+    "zip_path": "/home/serj/PycharmProjects/"
+  },
+  "proj2": {
+    "path": "/home/serj/PycharmProjects/untitled/test-dir-1",
+    "quantity": 5,
+    "zip_path": "/home/serj/PycharmProjects/"
+  }
 }
