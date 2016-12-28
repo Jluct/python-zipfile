@@ -24,7 +24,8 @@ class Archive:
         return (self.setting['path']).split(self.catalog)[0]
 
     def __init_archive(self):
-        name = self.setting['zip_path'] + self.catalog + self.separator + str(datetime.datetime.now()) + ".zip"
+        name = self.setting['zip_path'] + self.catalog + self.separator + \
+               str(datetime.datetime.now().__format__('%d.%m.%Y %H:%M:%S')) + ".zip"
         return zipfile.ZipFile(name, 'w')
 
     def __get_catalog_content(self):
@@ -68,7 +69,8 @@ class Archive:
         data_files = os.listdir(self.setting['zip_path'])
         for value in data_files:
             if value.find(self.catalog + self.separator) != (-1):
-                data[str((value.split(self.separator)[1]).split('.zip')[0])] = value
+                str_date = str((value.split(self.separator)[1]).split('.zip')[0])
+                data[value] =  datetime.datetime.strptime(str_date, '%d.%m.%Y %H:%M:%S')
 
         print(str(data))
 
