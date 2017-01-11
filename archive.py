@@ -2,6 +2,7 @@ import zipfile
 import os
 import sys
 import datetime
+import glob
 
 
 class Archive:
@@ -25,9 +26,14 @@ class Archive:
         parent_catalog = self.__get_parent_catalog()
         arch = self.__init_archive()
 
+        os.chdir(parent_catalog)
+
         for root, dirs, files in content:
             for file in files:
+
                 current_dir = root.split(parent_catalog)[-1] + str(self.path_separator)
+                print(os.path.join(current_dir, file))
+
                 arch.write(os.path.join(current_dir, file))
                 self.files_counter = self.files_counter + 1
 
