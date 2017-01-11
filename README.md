@@ -10,7 +10,7 @@
   "proj1": {
     "path": "/home/user/test-dir",
     "quantity": 7,
-    "zip_path": "home/user/backup"
+    "zip_path": "home/user/backup/"
   },
   "proj2": {
     "path": "/home/user/test-dir-1",
