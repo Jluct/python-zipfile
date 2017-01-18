@@ -2,7 +2,11 @@
   "proj1": {
     "path": "/home/user/test-dir",
     "quantity": 7,
-    "zip_path": "home/user/backup"
+    "zip_path": "home/user/backup",
+    "additional_files": [
+      "D:\\python test\\additional.txt",
+      "D:\\python test\\additional1.txt"
+    ]
   },
   "proj2": {
     "path": "/home/user/test-dir-1",

@@ -5,6 +5,12 @@ import datetime
 import glob
 
 
+'''
+    В чём прикол, что бы рекурсивно вызвать этот класс нужно передать файл настроек
+    Поэтому нужно разнести методы архивации и обработки управления архивацией в разные файлы
+    Класс должен обрабатывать только один блок настроек
+'''
+
 class Archive:
     setting = False
     parent_catalog = False
@@ -73,6 +79,9 @@ class Archive:
             data_sortable.append(key)
 
         return data_sortable
+
+    def archiving_additional_files(self):
+        pass
 
     def __get_catalog(self):
         self.catalog = (self.setting['path']).split(self.path_separator)[-1]
