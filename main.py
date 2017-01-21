@@ -2,7 +2,7 @@
 
 import json
 
-from archive import Archive
+from Archive import Archive
 
 setting = json.loads(open('setting.json').read())
 

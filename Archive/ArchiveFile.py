@@ -1,0 +1,122 @@
+import zipfile
+import os
+import sys
+import datetime
+
+
+class ArchiveFile:
+    # Родительский каталог архива, что бы получились относительные пути
+    parent_catalog = False
+
+    # Количество заархивированных файлов
+    files_counter = 0
+
+    # Каталог с архивируемыми файлами
+    catalog = ''
+
+    # Символ разделителя файловой системы. По умолчанию UNIX
+    path_separator = "/"
+
+    # Символ отделения названия в архиве. Состоит из названия каталога+separator+дата и время архивации
+    separator = ".-."
+
+    # дата и время архивации
+    datetime_format = '%d.%m.%Y %H:%M:%S'
+
+    # Путь к архивируемым файлам
+    files_path = ''
+
+    # Путь к директории для архива
+    arch_patch = ''
+
+    # Ресурс архива
+    __archive = False
+
+    """Получение настроек для ОС
+        Получение название каталога с файлами
+    """
+
+    def __init__(self):
+        self.__get_os_type()
+        self.__get_catalog()
+
+    def init_archive(self, arch_patch):
+
+        self.arch_patch = arch_patch
+
+        name = self.arch_patch + self.catalog + self.separator + str(
+            datetime.datetime.now().__format__(self.datetime_format)) + ".zip"
+        self.__archive = zipfile.ZipFile(name, 'w')
+
+    def archiving(self, files_path):
+
+        self.files_path = files_path
+
+        content = self.__get_catalog_content()  # !
+        parent_catalog = self.__get_parent_catalog()  # !
+
+        # переход в родительский каталог архива
+        os.chdir(parent_catalog)
+
+        for root, dirs, files in content:
+            for file in files:
+                current_dir = root.split(parent_catalog)[-1] + str(self.path_separator)
+                print(os.path.join(current_dir, file))
+
+                self.__archive.write(os.path.join(current_dir, file))
+                self.files_counter = self.files_counter + 1
+
+    def close_archive(self):
+        self.__archive.close()
+
+    def __archiving_files(self):
+        pass
+
+    def inspection_archive(self):
+        arch_counter = 0
+        data_files = os.listdir(self.arch_patch)
+        for value in data_files:
+            if value.find(self.catalog + self.separator) != (-1):
+                arch_counter = arch_counter + 1
+
+        return arch_counter
+
+    def delete_unnecessary_arch(self, quantity):
+        arch = self.__sorted_arch()
+        count = len(arch) - quantity
+        if count <= 0:
+            return True
+
+        i = 0
+
+        while i < count:
+            os.remove(self.arch_patch + arch[i])
+            i = i + 1
+
+    def __sorted_arch(self):
+        data = {}
+        data_sortable = []
+        data_files = os.listdir(self.arch_patch)
+        for value in data_files:
+            if value.find(self.catalog + self.separator) != (-1):
+                str_date = str((value.split(self.separator)[1]).split('.zip')[0])
+                data[value] = int(datetime.datetime.strptime(str_date, self.datetime_format).timestamp())
+
+        for key in sorted(data):
+            data_sortable.append(key)
+
+        return data_sortable
+
+    def __get_catalog_content(self):
+        return os.walk(self.files_path)
+
+    def __get_os_type(self):
+        if sys.platform == 'win32':
+            self.path_separator = '\\'
+            self.datetime_format = '%d.%m.%Y %H-%M-%S'
+
+    def __get_catalog(self):
+        self.catalog = (self.files_path).split(self.path_separator)[-1]
+
+    def __get_parent_catalog(self):
+        return (self.files_path).split(self.catalog)[0]
