@@ -69,7 +69,12 @@ class ArchiveFile:
     def close_archive(self):
         self.__archive.close()
 
-    def __archiving_files(self):
+    def archiving_addition_files(self, array_files):
+        for item in array_files:
+            return os.path.basename(array_files[item])
+
+
+    def archiving_files(self):
         pass
 
     def inspection_archive(self):

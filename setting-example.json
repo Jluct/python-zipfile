@@ -1,5 +1,6 @@
 {
   "proj1": {
+    "archive_name":"test",
     "path": "/home/user/test-dir",
     "quantity": 7,
     "zip_path": "home/user/backup",
