@@ -3,7 +3,7 @@
     "archive_name":"test",
     "path": "/home/user/test-dir",
     "quantity": 7,
-    "zip_path": "home/user/backup",
+    "arch_path": "home/user/backup",
     "additional_files": [
       "D:\\python test\\additional.txt",
       "D:\\python test\\additional1.txt"
@@ -12,6 +12,6 @@
   "proj2": {
     "path": "/home/user/test-dir-1",
     "quantity": 5,
-    "zip_path": "home/user/backup/"
+    "arch_path": "home/user/backup/"
   }
 }
