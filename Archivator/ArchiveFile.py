@@ -29,7 +29,11 @@ class ArchiveFile:
     # Путь к директории для архива
     arch_patch = ''
 
+    # Архив
     path_arch = ''
+
+    # Базовое название архива
+    __arch_name = ''
 
     # Ресурс архива
     __archive = False
@@ -50,6 +54,7 @@ class ArchiveFile:
     def init_archive(self, arch_patch, arch_name=""):
 
         self.arch_patch = arch_patch
+        self.__arch_name = arch_name
 
         name = self.arch_patch + arch_name + self.separator + str(
             datetime.datetime.now().__format__(self.datetime_format)) + ".zip"
@@ -115,17 +120,25 @@ class ArchiveFile:
 
         self.close_archive()
 
-    # def archiving_files(self):
-    #     pass
-    #
-    # def inspection_archive(self):
-    #     arch_counter = 0
-    #     data_files = os.listdir(self.arch_patch)
-    #     for value in data_files:
-    #         if value.find(self.catalog + self.separator) != (-1):
-    #             arch_counter = arch_counter + 1
-    #
-    #     return arch_counter
+    def inspection_archive(self, arch_name=False):
+
+        if (arch_name is not True) and (self.__arch_name == ''):
+            return False
+
+        if arch_name is not True:
+            arch_name = self.__arch_name
+
+        arch_counter = 0
+        data_files = os.listdir(self.arch_patch)
+
+        print(data_files)
+
+        for value in data_files:
+            if value.find(arch_name + self.separator) != (-1):
+                arch_counter = arch_counter + 1
+
+        return arch_counter
+
     #
     # def delete_unnecessary_arch(self, quantity):
     #     arch = self.__sorted_arch()
