@@ -85,7 +85,6 @@ class ArchiveFile:
 
     def open_archive(self, archive_path, archive_mode):
 
-        # if zipfile.is_zipfile(archive_path):
         if zipfile.is_zipfile(archive_path):
             return zipfile.ZipFile(archive_path, archive_mode)
         else:
@@ -93,9 +92,11 @@ class ArchiveFile:
 
     def archiving_addition_files(self, array_files):
 
+        print(type(self.__archive))
         self.__archive = self.open_archive(self.path_arch, 'a')
-        # print(str(self.__archive))
-        # exit()
+        print(type(self.__archive))
+
+        # os.mkdir(self.path_arch + self.path_separator + 'additional_files' + self.path_separator)
 
         i = 0
         while i < len(array_files):
@@ -105,13 +106,14 @@ class ArchiveFile:
             elif os.path.isfile(array_files[i]):
                 parent_catalog = self.__get_parent_catalog(array_files[i])
                 os.chdir(parent_catalog)
-                print(str(parent_catalog))
 
                 file = array_files[i].split(parent_catalog)[-1]
 
-                self.__archive.write(file)  # Рекурсия!!!!
+                self.__archive.write(file)
 
-        i = i + 1
+            i = i + 1
+
+        self.close_archive()
 
     # def archiving_files(self):
     #     pass
