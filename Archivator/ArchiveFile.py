@@ -21,7 +21,7 @@ class ArchiveFile:
     separator = ".-."
 
     # дата и время архивации
-    datetime_format = '%d.%m.%Y %H:%M:%S'
+    datetime_format = '%d.%m.%Y %H-%M-%S'
 
     # Путь к архивируемым файлам
     files_path = ''
@@ -120,51 +120,44 @@ class ArchiveFile:
 
         self.close_archive()
 
-    def inspection_archive(self, arch_name=False):
-
-        if (arch_name is not True) and (self.__arch_name == ''):
-            return False
-
-        if arch_name is not True:
-            arch_name = self.__arch_name
+    def inspection_archive(self):
 
         arch_counter = 0
         data_files = os.listdir(self.arch_patch)
 
-        print(data_files)
-
         for value in data_files:
-            if value.find(arch_name + self.separator) != (-1):
+            if value.find(self.__arch_name + self.separator) != (-1):
                 arch_counter = arch_counter + 1
 
         return arch_counter
 
-    #
-    # def delete_unnecessary_arch(self, quantity):
-    #     arch = self.__sorted_arch()
-    #     count = len(arch) - quantity
-    #     if count <= 0:
-    #         return True
-    #
-    #     i = 0
-    #
-    #     while i < count:
-    #         os.remove(self.arch_patch + arch[i])
-    #         i = i + 1
-    #
-    # def __sorted_arch(self):
-    #     data = {}
-    #     data_sortable = []
-    #     data_files = os.listdir(self.arch_patch)
-    #     for value in data_files:
-    #         if value.find(self.catalog + self.separator) != (-1):
-    #             str_date = str((value.split(self.separator)[1]).split('.zip')[0])
-    #             data[value] = int(datetime.datetime.strptime(str_date, self.datetime_format).timestamp())
-    #
-    #     for key in sorted(data):
-    #         data_sortable.append(key)
-    #
-    #     return data_sortable
+    def delete_unnecessary_arch(self, quantity):
+        arch = self.__sorted_arch(self.__arch_name)
+        count = len(arch) - quantity
+        if count <= 0:
+            return True
+
+        i = 0
+
+        while i < count:
+            os.remove(self.arch_patch + arch[i])
+            i = i + 1
+
+    def __sorted_arch(self, name):
+        data = {}
+        data_sortable = []
+        data_files = os.listdir(self.arch_patch)
+        for value in data_files:
+            if value.find(name + self.separator) != (-1):
+                arch_date = os.path.getctime(value)  # название файла, но не абсолютный путь
+                data[value] = int(datetime.datetime.strptime(arch_date, self.datetime_format).timestamp())
+                # str_date = str((value.split(self.separator)[1]).split('.zip')[0])
+                # data[value] = int(datetime.datetime.strptime(str_date, self.datetime_format).timestamp())
+
+        for key in sorted(data):
+            data_sortable.append(key)
+
+        return data_sortable
 
     def __get_catalog_content(self, files_path):
         return os.walk(files_path)
@@ -172,7 +165,7 @@ class ArchiveFile:
     def __get_os_type(self):
         if sys.platform == 'win32':
             self.path_separator = '\\'
-            self.datetime_format = '%d.%m.%Y %H-%M-%S'
+            # self.datetime_format = '%d.%m.%Y %H-%M-%S'
 
     """Возвращает название каталога архивируемой папки"""
 

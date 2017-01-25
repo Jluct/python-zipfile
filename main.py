@@ -8,10 +8,10 @@ setting = json.loads(open('setting.json').read())
 
 for key in setting:
     archive = Archive(setting[key])
-    archive.archiving()
-    archive.archiving_additional_files()
+    # archive.archiving()
+    # archive.archiving_additional_files()
     print(archive.inspection_archive())
     # print(str(archive.files_counter))
     # archive.inspection_archive()
-    # archive.delete_unnecessary_arch()
+    archive.delete_unnecessary_arch()
 print("---------Готово---------")

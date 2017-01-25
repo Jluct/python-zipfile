@@ -1,7 +1,7 @@
 {
   "proj1": {
     "archive_name":"test",
-    "path": "/home/user/test-dir",
+    "files_path": "/home/user/test-dir",
     "quantity": 7,
     "arch_path": "home/user/backup",
     "additional_files": [
@@ -10,7 +10,7 @@
     ]
   },
   "proj2": {
-    "path": "/home/user/test-dir-1",
+    "files_path": "/home/user/test-dir-1",
     "quantity": 5,
     "arch_path": "home/user/backup/"
   }
