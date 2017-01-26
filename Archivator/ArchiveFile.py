@@ -140,6 +140,7 @@ class ArchiveFile:
         i = 0
 
         while i < count:
+            print(self.arch_patch + arch[i])
             os.remove(self.arch_patch + arch[i])
             i = i + 1
 
@@ -147,10 +148,12 @@ class ArchiveFile:
         data = {}
         data_sortable = []
         data_files = os.listdir(self.arch_patch)
+
         for value in data_files:
             if value.find(name + self.separator) != (-1):
-                arch_date = os.path.getctime(value)  # название файла, но не абсолютный путь
-                data[value] = int(datetime.datetime.strptime(arch_date, self.datetime_format).timestamp())
+                # arch_date = int(os.path.getctime(self.arch_patch + value))
+                data[value] = int(os.path.getctime(self.arch_patch + value))
+                print(value)
                 # str_date = str((value.split(self.separator)[1]).split('.zip')[0])
                 # data[value] = int(datetime.datetime.strptime(str_date, self.datetime_format).timestamp())
 

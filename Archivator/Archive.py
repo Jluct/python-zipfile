@@ -25,7 +25,6 @@ class Archive:
             self.__archive.archiving_addition_files(self.setting['additional_files'])
 
     def inspection_archive(self):
-
         return self.__archive.inspection_archive()
 
     def delete_unnecessary_arch(self):
