@@ -1,5 +1,9 @@
 from Archivator.ArchiveFile import ArchiveFile
 
+if __name__ == '__main__':
+    print("This file is not a point of entry")
+    exit()
+
 
 class Archive:
     setting = False

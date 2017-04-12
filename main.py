@@ -4,12 +4,13 @@ import json
 
 from Archivator.Archive import Archive
 
-setting = json.loads(open('setting.json').read())
+if __name__ == '__main__':
+    setting = json.loads(open('setting.json').read())
 
-for key in setting:
-    archive = Archive(setting[key])
-    archive.archiving()
-    archive.archiving_additional_files()
-    print(archive.inspection_archive())
-    archive.delete_unnecessary_arch()
-print("---------Готово---------")
+    for key in setting:
+        archive = Archive(setting[key])
+        archive.archiving()
+        archive.archiving_additional_files()
+        print(archive.inspection_archive())
+        archive.delete_unnecessary_arch()
+    print("---------Готово---------")

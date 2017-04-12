@@ -3,6 +3,10 @@ import os
 import sys
 import datetime
 
+if __name__ == '__main__':
+    print("This file is not a point of entry")
+    exit()
+
 
 class ArchiveFile:
     # Родительский каталог архива, что бы получились относительные пути
