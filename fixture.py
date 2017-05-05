@@ -14,7 +14,7 @@ import random
 
 
 class Fixture:
-    __root_dir = 'E:\\python\\test'
+    __root_dir = ''
     __count_dir = 10
     __min_files = 1
     __max_files = 10
