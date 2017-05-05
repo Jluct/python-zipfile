@@ -85,5 +85,5 @@ class Fixture:
     def run(self):
         self.__generate_dir()
 
-# fix = fixture.Fixture()
-# fix.run()
+fix = Fixture()
+fix.run()
