@@ -157,7 +157,7 @@ class ArchiveFile:
             if value.find(name + self.separator) != (-1):
                 # arch_date = int(os.path.getctime(self.arch_patch + value))
                 data[value] = int(os.path.getctime(self.arch_patch + value))
-                print(value)
+                # print(value)
                 # str_date = str((value.split(self.separator)[1]).split('.zip')[0])
                 # data[value] = int(datetime.datetime.strptime(str_date, self.datetime_format).timestamp())
 
@@ -182,5 +182,5 @@ class ArchiveFile:
     """Возвращает родительский каталог архивируемой папки"""
 
     def __get_parent_catalog(self, files_path):
-        print(files_path)
+        print(self.__get_catalog(files_path))
         return files_path.split(self.__get_catalog(files_path))[0]
