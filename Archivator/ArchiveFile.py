@@ -146,7 +146,7 @@ class ArchiveFile:
         while i < count:
             print(self.arch_patch + arch[i])
             os.remove(self.arch_patch + arch[i])
-            i = i + 1
+            i += 1
 
     def __sorted_arch(self, name):
         data = {}
@@ -182,4 +182,5 @@ class ArchiveFile:
     """Возвращает родительский каталог архивируемой папки"""
 
     def __get_parent_catalog(self, files_path):
+        print(files_path)
         return files_path.split(self.__get_catalog(files_path))[0]
