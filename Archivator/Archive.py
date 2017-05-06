@@ -14,7 +14,7 @@ class Archive:
         self.setting = setting
         # self.__get_catalog()
         self.__archive = ArchiveFile()
-        # Инициализация архива ?
+        # Инициализация архива
         self.__archive.init_archive(self.setting['arch_path'], self.setting['archive_name'])
 
     def archiving(self):
